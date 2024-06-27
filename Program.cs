@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FormBackend;
+using FormBackend.Services.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
 
@@ -25,16 +27,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("FormPolicy");
-
-UserService _service = new UserService();
-
-app.MapPost("/AddUser", (UserModel user) =>{
-    return _service.AddUser(user);
-});
-
-app.MapGet("/GetUsers", () =>{
-    return _service.GetUsers();
-});
 
 
 app.Run();
