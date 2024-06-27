@@ -7,7 +7,6 @@ namespace FormBackend{
             users.Add(user);
             return true;
         }
-
         public IEnumerable<UserModel> GetUsers(){
             return users;
         }

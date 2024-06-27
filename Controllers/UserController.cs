@@ -21,7 +21,7 @@ namespace FormBackend.Controllers
 
         [HttpPost]
         [Route("AddUser")]
-        public IActionResult AddUser(UserModel user){
+        public IActionResult AddUser([FromBody] UserModel user){
             try{
                 return Ok(_service.AddUser(user));
             }
