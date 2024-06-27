@@ -1,6 +1,5 @@
-using FormBackend.Services;
-using FormBackend.Services.Context;
 using Microsoft.EntityFrameworkCore;
+using FormBackend;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,19 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddScoped<UserService>();
-builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
 
 var connectionString = builder.Configuration.GetConnectionString("FormBase");
-
-builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(connectionString));
-builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
-    builder.WithOrigins("http://localhost:5005")
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-}));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()){
@@ -35,5 +25,16 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("FormPolicy");
+
+UserService _service = new UserService();
+
+app.MapPost("/AddUser", (UserModel user) =>{
+    return _service.AddUser(user);
+});
+
+app.MapGet("/GetUsers", () =>{
+    return _service.GetUsers();
+});
+
 
 app.Run();
