@@ -4555,19 +4555,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Aiden\\.nuget\\packages\\": {}
+    "C:\\Users\\George\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj",
+      "projectUniqueName": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj",
       "projectName": "FormBackend",
-      "projectPath": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj",
-      "packagesPath": "C:\\Users\\Aiden\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\obj\\",
+      "projectPath": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj",
+      "packagesPath": "C:\\Users\\George\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Aiden\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\George\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
