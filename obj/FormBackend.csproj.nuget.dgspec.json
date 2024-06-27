@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj": {}
+    "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj": {
+    "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj",
+        "projectUniqueName": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj",
         "projectName": "FormBackend",
-        "projectPath": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\FormBackend.csproj",
-        "packagesPath": "C:\\Users\\George\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\George\\Nextcloud\\Internship\\Assignments\\FormBackend\\obj\\",
+        "projectPath": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\FormBackend.csproj",
+        "packagesPath": "C:\\Users\\Aiden\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Aiden\\Desktop\\Codestack\\GithubRepos\\New folder (10)\\FormBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\George\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Aiden\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -44,6 +44,22 @@
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
             },
