@@ -1,4 +1,4 @@
-namespace FormBackend.Models{
+namespace FormBackend{
     public class UserModel{
         public int ID { get; set; }
         public string FirstName  { get; set; }
