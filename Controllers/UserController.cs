@@ -1,22 +1,20 @@
 using FormBackend.Model;
+using FormBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FormBackend.Controllers
-{
+namespace FormBackend.Controllers{
+    [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase{
+    public class UserController: ControllerBase{
         private readonly UserService _service;
         public UserController(UserService userService){
             _service = userService;
         }
+
         [HttpGet]
         [Route("GetAllUsers")]
-        public IActionResult GetAllUsers(){
-            try{
-                return Ok(_service.GetUsers());
-            }catch(Exception error){
-                return BadRequest(error.Message);
-            }
+        public IEnumerable<UserModel> GetAllUsers(){
+            return _service.GetUsers();
         }
 
         [HttpPost]
