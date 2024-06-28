@@ -1,20 +1,12 @@
 using FormBackend.Model;
-using FormBackend.Model.DTOS;
 using FormBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FormBackend.Controllers
-{
+namespace FormBackend.Controllers{
     [ApiController]
     [Route("[controller]")]
-    public class FormController : ControllerBase
-    {
-        private readonly  FormService _service;
-
-        public FormController(FormService service)
-        {
-            _service = service;
-        }
+    public class FormController(FormService service) : ControllerBase{
+        private readonly  FormService _service = service;
 
         [HttpPost]
         [Route("AddForm")]
@@ -31,5 +23,13 @@ namespace FormBackend.Controllers
         [HttpPost]
         [Route("EditForm")]
         public IActionResult EditForm([FromBody] FormModel form) => _service.EditForm(form) ? Ok("Successfully updated") : BadRequest();
+
+        [HttpGet]
+        [Route("FilterByFirstName")]
+        public IEnumerable<FormModel> FilterByFirstName() => _service.FilterByFirstName();
+
+        [HttpGet]
+        [Route("FilterByLastName")]
+        public IEnumerable<FormModel> FilterByLastName() => _service.FilterByLastName();
     }
 }
