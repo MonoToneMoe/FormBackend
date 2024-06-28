@@ -10,18 +10,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddDbContext<DataContext>();
 
-var app = builder.Build();
+
+
 
 var connectionString = builder.Configuration.GetConnectionString("FormBase");
+builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(connectionString));
 
 
-// builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
-//     builder.WithOrigins("http://localhost:5123")
-//     .AllowAnyOrigin()
-//     .AllowAnyMethod();
-// }));
+builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
+    builder.WithOrigins("http://localhost:5123")
+    .AllowAnyOrigin()
+    .AllowAnyMethod();
+}));
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()){

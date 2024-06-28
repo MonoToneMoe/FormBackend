@@ -11,11 +11,11 @@ namespace FormBackend.Controllers{
             _service = userService;
         }
 
-        [HttpGet]
-        [Route("GetAllUsers")]
-        public IEnumerable<UserModel> GetAllUsers(){
-            return _service.GetUsers();
-        }
+        // [HttpGet]
+        // [Route("GetAllUsers")]
+        // public IEnumerable<UserModel> GetAllUsers(){
+        //     return _service.GetUsers();
+        // }
 
         [HttpPost]
         [Route("AddUser")]
