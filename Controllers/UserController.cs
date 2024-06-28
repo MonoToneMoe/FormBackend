@@ -5,11 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace FormBackend.Controllers{
     [ApiController]
     [Route("[controller]")]
-    public class UserController: ControllerBase{
-        private readonly UserService _service;
-        public UserController(UserService userService){
-            _service = userService;
-        }
+    public class UserController(UserService userService) : ControllerBase{
+        private readonly UserService _service = userService;
 
         // [HttpGet]
         // [Route("GetAllUsers")]

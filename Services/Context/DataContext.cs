@@ -1,11 +1,12 @@
 using FormBackend.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace FormBackend.Services.Context{
-    public class DataContext : DbContext
+namespace FormBackend.Services.Context
+{
+    public class DataContext(DbContextOptions options) : DbContext(options)
     {
         public DbSet<UserModel> UserInfo { get; set; }
-        public DataContext(DbContextOptions options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
         }
