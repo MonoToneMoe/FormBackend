@@ -28,5 +28,26 @@ namespace FormBackend.Controllers{
                 return BadRequest(error.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Login")]
+        public IActionResult Login([FromBody] LoginDTO login){
+            try{
+                return Ok(_service.Login(login));
+            }catch(Exception error){
+                return BadRequest(error.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] ResetPassDTO newPass){
+            try{
+                return Ok(_service.ResetPassword(newPass));
+            }
+            catch(Exception error){
+                return BadRequest(error.Message);
+            }
+        }
     }
 }
