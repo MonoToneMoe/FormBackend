@@ -14,7 +14,7 @@ builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(conne
 
 
 builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
-    builder.WithOrigins("http://localhost:5123")
+    builder.WithOrigins("http://localhost:5123", "*")
     .AllowAnyOrigin()
     .AllowAnyMethod();
 }));

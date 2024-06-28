@@ -11,7 +11,7 @@ namespace FormBackend.Services{
             _context = context;
         }
         public bool AddUser(UserModel user){
-            _context.Add(user);
+            _context.UserInfo.Add(user);
             return _context.SaveChanges() != 0;
         }
 
