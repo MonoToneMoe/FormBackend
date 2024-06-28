@@ -17,7 +17,7 @@ namespace FormBackend.Services{
             _context = context;
         }
         public bool AddUser(CreateAccountDTO user){
-            if (DoesUserExist(user.Email)){
+            if(!DoesUserExist(user.Email)){
                 PassDTO pass = HashPassword(user.Password);
                 UserModel newUser = new(){
                     ID = user.ID,
