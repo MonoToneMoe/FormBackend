@@ -1,4 +1,5 @@
 using FormBackend.Model;
+using FormBackend.Model.DTOS;
 using FormBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,11 @@ namespace FormBackend.Controllers{
             _service = userService;
         }
 
-        // [HttpGet]
-        // [Route("GetAllUsers")]
-        // public IEnumerable<UserModel> GetAllUsers(){
-        //     return _service.GetUsers();
-        // }
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public IEnumerable<UserDTO> GetAllUsers(){
+            return _service.GetUsers();
+        }
 
         [HttpPost]
         [Route("AddUser")]
