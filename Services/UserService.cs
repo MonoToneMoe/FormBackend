@@ -16,8 +16,22 @@ namespace FormBackend.Services{
         public UserService(DataContext context){
             _context = context;
         }
-        public bool AddUser(UserModel user){
-            _context.UserInfo.Add(user);
+        public bool AddUser(CreateAccountDTO user){
+            if (DoesUserExist(user.Email)){
+                PassDTO pass = HashPassword(user.Password);
+                UserModel newUser = new(){
+                    ID = user.ID,
+                    Email = user.Email,
+                    Salt = pass.Salt,
+                    Hash = pass.Hash,
+                    IsAdmin = user.IsAdmin,
+                    Birthday = user.Birthday,
+                    Address = user.Address,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                };
+                _context.UserInfo.Add(newUser);
+            }
             return _context.SaveChanges() != 0;
         }
 
