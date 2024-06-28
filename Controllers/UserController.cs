@@ -12,12 +12,6 @@ namespace FormBackend.Controllers{
             _service = userService;
         }
 
-        [HttpGet]
-        [Route("GetAllUsers")]
-        public IEnumerable<UserDTO> GetAllUsers(){
-            return _service.GetUsers();
-        }
-
         [HttpPost]
         [Route("AddUser")]
         public IActionResult AddUser([FromBody] CreateAccountDTO user){

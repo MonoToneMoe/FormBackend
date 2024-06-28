@@ -25,10 +25,6 @@ namespace FormBackend.Services{
                     Salt = pass.Salt,
                     Hash = pass.Hash,
                     IsAdmin = user.IsAdmin,
-                    Birthday = user.Birthday,
-                    Address = user.Address,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
                 };
                 _context.UserInfo.Add(newUser);
             }
@@ -40,12 +36,7 @@ namespace FormBackend.Services{
         public UserDTO Converter(UserModel user){
             return new UserDTO{
                 ID = user.ID,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
                 Email = user.Email,
-                Birthday = user.Birthday,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
                 IsAdmin = user.IsAdmin 
             };
         }
