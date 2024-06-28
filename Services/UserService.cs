@@ -23,8 +23,8 @@ namespace FormBackend.Services{
                 Email = user.Email,
                 Birthday = user.Birthday,
                 PhoneNumber = user.PhoneNumber,
-                Address = user.Address
-                
+                Address = user.Address,
+                IsAdmin = user.IsAdmin 
             };
         }
         
