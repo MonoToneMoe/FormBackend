@@ -1,7 +1,6 @@
 using FormBackend.Model;
 using Microsoft.EntityFrameworkCore;
-namespace FormBackend.Services.Context
-{
+namespace FormBackend.Services.Context{
     public class DataContext: DbContext
     {
         public DbSet<UserModel> UserInfo { get; set; }
