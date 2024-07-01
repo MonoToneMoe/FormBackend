@@ -84,7 +84,7 @@ namespace FormBackend.Services{
                 return "Successfully changed password";
             }else return "Email is incorrect, try again";
         }
-        public bool EditUser(UserModel user) => _context.UserInfo.Update((UserModel)_context.UserInfo.Where(u => u.Email == user.Email)) != null && _context.SaveChanges() != 0;
+        public bool EditUser(CreateAccountDTO user) => _context.UserInfo.Update((UserModel)_context.UserInfo.Where(u => u.Email == user.Email)) != null && _context.SaveChanges() != 0;
     }
     
 

@@ -10,7 +10,7 @@ namespace FormBackend.Controllers{
         [HttpPost] [Route("Login")] public IActionResult Login([FromBody] LoginDTO login) => _service.Login(login) != null ? Ok() : BadRequest("error logging in");
         [HttpGet] [Route("GetAllUsers")] public IEnumerable<UserDTO> GetAllUsers() => _service.GetUsers();
         [HttpPut] [Route("ResetPassword")] public IActionResult ResetPassword([FromBody] ResetPassDTO newPass) => _service.ResetPassword(newPass) != null ? Ok("password reset") : BadRequest("error resetting password");
-        [HttpPut] [Route("EditUser")] public IActionResult EditUser([FromBody] UserModel UserToUpdate) => _service.EditUser(UserToUpdate) ? Ok("Successfully Updated") : BadRequest("Error updating user");
+        [HttpPut] [Route("EditUser")] public IActionResult EditUser([FromBody] CreateAccountDTO UserToUpdate) => _service.EditUser(UserToUpdate) ? Ok("Successfully Updated") : BadRequest("Error updating user");
         [HttpDelete] [Route("DeleteUser/{id}")] public IActionResult DeleteUser(int id) => _service.DeleteUser(id) ? Ok("Successfully Deleted") : BadRequest("Error deleting user");
     }
 }
