@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<FormService>();
 
 var connectionString = builder.Configuration.GetConnectionString("FormBase");
 builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(connectionString));
