@@ -72,17 +72,17 @@ namespace FormBackend.Services{
             return Results.NotFound("User name or Password is incorrect");
         }
 
-        public string ResetPassword(ResetPassDTO NewPass){
+        public bool ResetPassword(ResetPassDTO NewPass){
             UserModel foundUser = GetUserByUsername(NewPass.Email);
             if(foundUser != null){ 
                 var UpdatedPass = HashPassword(NewPass.NewPassword);
                 if(foundUser.Salt == UpdatedPass.Salt || foundUser.Hash == UpdatedPass.Hash){
-                    return "The passwords are the same, try again";
+                    return false;
                 }
                 foundUser.Salt = UpdatedPass.Salt;
                 foundUser.Hash = UpdatedPass.Hash;
-                return "Successfully changed password";
-            }else return "Email is incorrect, try again";
+                return true;
+            }else return false;
         }
         public bool EditUser(CreateAccountDTO user) => _context.UserInfo.Update((UserModel)_context.UserInfo.Where(u => u.Email == user.Email)) != null && _context.SaveChanges() != 0;
     }

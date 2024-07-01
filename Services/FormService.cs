@@ -1,8 +1,7 @@
 using FormBackend.Model;
 using FormBackend.Services.Context;
 namespace FormBackend.Services{
-    public class FormService(DataContext context)
-    {
+    public class FormService(DataContext context){
         private readonly DataContext _context = context;
         public bool NewForm(FormModel newForm) => _context.FormInfo.Add(newForm) != null && _context.SaveChanges() != 0;
         public IEnumerable<FormModel> GetForms() => _context.FormInfo;
