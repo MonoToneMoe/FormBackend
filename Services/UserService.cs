@@ -53,15 +53,17 @@ namespace FormBackend.Services{
             return newHashPassword;
         }
         public bool Login(LoginDTO user){
-            bool Result = false;
+            bool Result = true;
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
-                if(pass.Hash == userModel.Hash && pass.Salt == userModel.Salt){
+
+                if(userModel != null && pass.Hash == userModel.Hash && pass.Salt == userModel.Salt){
+                    Result = false;
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345"));
                     var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
                     var tokenOptions = new JwtSecurityToken(
-                        issuer : "http://localhost:5000",
+                        issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
                         claims: new List<Claim>(),
                         signingCredentials: signingCredentials
