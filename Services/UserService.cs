@@ -52,8 +52,8 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
-        public IResult Login(LoginDTO user){
-            IResult Result = Results.BadRequest("Try again little bro");
+        public bool Login(LoginDTO user){
+            bool Result = false;
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
@@ -67,7 +67,7 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = Results.Ok(new {Token = tokenString});
+                    Result = true;
                 } 
             }
             return Result;
