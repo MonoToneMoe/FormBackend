@@ -51,7 +51,6 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
-        
         public IResult Login(LoginDTO user){
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
@@ -69,7 +68,7 @@ namespace FormBackend.Services{
                     return tokenString == null ? Results.NotFound() : Results.Ok(tokenString);
                 } 
             }
-            return Results.NotFound("User name or Password is incorrect");
+            return Results.BadRequest("User name or Password is incorrect");
         }
 
         public bool ResetPassword(ResetPassDTO NewPass){
