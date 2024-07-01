@@ -70,7 +70,7 @@ namespace FormBackend.Services{
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
                     Result = tokenString ?? "There was an error in  the login";
                 } 
-            }else Result = "User Not found";
+            }else {Result = "User Not found";}
             return Result;
         }
 
