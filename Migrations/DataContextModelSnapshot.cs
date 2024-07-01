@@ -21,7 +21,7 @@ namespace FormBackend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FormBackend.Model.UserModel", b =>
+            modelBuilder.Entity("FormBackend.Model.FormModel", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -32,7 +32,7 @@ namespace FormBackend.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Birthday")
+                    b.Property<string>("DOB")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -44,22 +44,37 @@ namespace FormBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Hash")
+                    b.Property<string>("LastName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FormInfo");
+                });
+
+            modelBuilder.Entity("FormBackend.Model.UserModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Salt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
