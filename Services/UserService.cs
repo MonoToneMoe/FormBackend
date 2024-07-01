@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FormBackend.Services{
@@ -35,7 +34,7 @@ namespace FormBackend.Services{
                 IsAdmin = user.IsAdmin 
             };
         }
-        public UserModel GetUserByUsername(string username) => _context.UserInfo.SingleOrDefault(u => u.Email == username);
+        public UserModel GetUserByUsername(string email) => _context.UserInfo.SingleOrDefault(u => u.Email == email);
         public bool DeleteUser(int id) => _context.UserInfo.Remove((UserModel)_context.UserInfo.Where(u => u.ID == id)) != null && _context.SaveChanges() != 0;
         public IEnumerable<UserDTO> GetUsers(){
             IEnumerable<UserModel> users = _context.UserInfo;
@@ -53,8 +52,8 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
-        public string Login(LoginDTO user){
-            string Result = "This is nothing, ignore this";
+        public IResult Login(LoginDTO user){
+            IResult Result = Results.BadRequest("Try again little bro");
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
@@ -68,9 +67,9 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = tokenString ?? "There was an error in  the login";
+                    Result = Results.Ok(new {Token = tokenString});
                 } 
-            }else {Result = "User Not found";}
+            }
             return Result;
         }
 
@@ -88,6 +87,4 @@ namespace FormBackend.Services{
         }
         public bool EditUser(CreateAccountDTO user) => _context.UserInfo.Update((UserModel)_context.UserInfo.Where(u => u.Email == user.Email)) != null && _context.SaveChanges() != 0;
     }
-    
-
 }

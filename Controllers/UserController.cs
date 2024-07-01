@@ -6,7 +6,7 @@ namespace FormBackend.Controllers{
     public class UserController(UserService userService) : ControllerBase{
         private readonly UserService _service = userService;
         [HttpPost] [Route("AddUser")] public IActionResult AddUser([FromBody] CreateAccountDTO user) => _service.AddUser(user) ? Ok("sucessfully added") : BadRequest("error adding user");
-        [HttpPost] [Route("Login")] public string Login([FromBody] LoginDTO login) => _service.Login(login);
+        [HttpPost] [Route("Login")] public IActionResult Login([FromBody] LoginDTO login) => _service.Login(login);
         [HttpGet] [Route("GetAllUsers")] public IEnumerable<UserDTO> GetAllUsers() => _service.GetUsers();
         [HttpPut] [Route("ResetPassword")] public IActionResult ResetPassword([FromBody] ResetPassDTO newPass) => _service.ResetPassword(newPass) ? Ok("Password reset") : BadRequest("Error resetting password");
         [HttpPut] [Route("EditUser")] public IActionResult EditUser([FromBody] CreateAccountDTO UserToUpdate) => _service.EditUser(UserToUpdate) ? Ok("Successfully Updated") : BadRequest("Error updating user");
