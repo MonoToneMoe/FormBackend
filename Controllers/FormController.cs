@@ -6,7 +6,7 @@ namespace FormBackend.Controllers{
     [ApiController]
     [Route("[controller]")]
     public class FormController(FormService service) : ControllerBase{
-        private readonly  FormService _service = service;
+        private readonly FormService _service = service;
 
         [HttpPost]
         [Route("AddForm")]

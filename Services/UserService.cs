@@ -13,9 +13,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 namespace FormBackend.Services{
     public class UserService{
         private readonly DataContext _context;
-        public UserService(DataContext context){
-            _context = context;
-        }
+        public UserService(DataContext context){_context = context;}
         public bool AddUser(CreateAccountDTO user){
             if(!DoesUserExist(user.Email)){
                 PassDTO pass = HashPassword(user.Password);
@@ -30,9 +28,7 @@ namespace FormBackend.Services{
             }
             return _context.SaveChanges() != 0;
         }
-
         public bool DoesUserExist(string email) => _context.UserInfo.SingleOrDefault(u => u.Email == email) != null;
-
         public UserDTO Converter(UserModel user){
             return new UserDTO{
                 ID = user.ID,
@@ -40,13 +36,11 @@ namespace FormBackend.Services{
                 IsAdmin = user.IsAdmin 
             };
         }
-        
         public UserModel GetUserByUsername(string username) => _context.UserInfo.SingleOrDefault(u => u.Email == username);
         public IEnumerable<UserDTO> GetUsers(){
             IEnumerable<UserModel> users = _context.UserInfo;
             return users.Select(user => Converter(user)).ToList();
         }
-
         public PassDTO HashPassword(string passowrd){
             PassDTO newHashPassword = new();
             byte[] SaltByte = new byte[64];
@@ -72,9 +66,9 @@ namespace FormBackend.Services{
                         audience: "http://localhost:5000",
                         claims: new List<Claim>(),
                         signingCredentials: signingCredentials
-                        );
-                        var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                        return tokenString == null ? Results.NotFound() : Results.Ok(tokenString);
+                    );
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                    return tokenString == null ? Results.NotFound() : Results.Ok(tokenString);
                 } 
             }
             return Results.NotFound("User name or Password is incorrect");
@@ -92,7 +86,6 @@ namespace FormBackend.Services{
                 return "Successfully changed password";
             }else return "Email is incorrect, try again";
         }
-        
     }
 
 }
