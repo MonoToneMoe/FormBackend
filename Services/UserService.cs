@@ -54,6 +54,7 @@ namespace FormBackend.Services{
             return newHashPassword;
         }
         public string Login(LoginDTO user){
+            string Result = "This is nothing, ignore this";
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
@@ -67,10 +68,10 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    return tokenString == null ? "There was an error in  the login" : tokenString;
+                    Result = tokenString ?? "There was an error in  the login";
                 } 
-            }else return "User Not found";
-            return "This is the only return statement";
+            }else Result = "User Not found";
+            return Result;
         }
 
         public bool ResetPassword(ResetPassDTO NewPass){
