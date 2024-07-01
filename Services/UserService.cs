@@ -7,6 +7,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FormBackend.Services{
     public class UserService{
@@ -52,9 +53,8 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
-        public IResult Login(LoginDTO user){
-            IResult Result = Results.BadRequest("Something went wrong"); 
-            if(DoesUserExist(user.Username) == true){
+        public string Login(LoginDTO user){
+            if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
                 if(pass.Hash == userModel.Hash && pass.Salt == userModel.Salt){
@@ -67,10 +67,10 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = tokenString == null ? Results.NotFound("There was an error in  the login") : Results.Ok(new {token = tokenString});
+                    return tokenString == null ? "There was an error in  the login" : tokenString;
                 } 
             }
-            return Result;
+            return "User Not found";
         }
 
         public bool ResetPassword(ResetPassDTO NewPass){
