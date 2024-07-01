@@ -54,7 +54,7 @@ namespace FormBackend.Services{
         }
         public IResult Login(LoginDTO user){
             IResult Result = Results.BadRequest("Something went wrong"); 
-            if(DoesUserExist(user.Username)){
+            if(DoesUserExist(user.Username) == true){
                 UserModel userModel = GetUserByUsername(user.Username);
                 PassDTO pass = HashPassword(user.Password);
                 if(pass.Hash == userModel.Hash && pass.Salt == userModel.Salt){
