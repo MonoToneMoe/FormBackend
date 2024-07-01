@@ -34,7 +34,6 @@ namespace FormBackend.Services{
                 IsAdmin = user.IsAdmin 
             };
         }
-        public UserModel GetUserByUsername(string email) => _context.UserInfo.SingleOrDefault(u => u.Email == email);
         public bool DeleteUser(int id) => _context.UserInfo.Remove((UserModel)_context.UserInfo.Where(u => u.ID == id)) != null && _context.SaveChanges() != 0;
         public IEnumerable<UserDTO> GetUsers(){
             IEnumerable<UserModel> users = _context.UserInfo;
@@ -52,14 +51,18 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
-        public bool Login(LoginDTO user){
-            bool Result = true;
+        public UserModel GetUserByUsername(string email) => _context.UserInfo.SingleOrDefault(u => u.Email == email);
+        public bool VerifyUsersPassword(string? passowrd, string? storedHash, string? storedSalt){
+            byte[] SaltBytes = Convert.FromBase64String(storedSalt);
+            Rfc2898DeriveBytes rfc2898DeriveBytes = new(passowrd, SaltBytes, 10000);
+            string newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+            return newHash == storedHash;
+        }
+        public string Login(LoginDTO user){
+            string Result = "Not Found";
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
-                PassDTO pass = HashPassword(user.Password);
-
-                if(userModel != null && pass.Hash == userModel.Hash && pass.Salt == userModel.Salt){
-                    Result = false;
+                if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Hash)){
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345"));
                     var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
                     var tokenOptions = new JwtSecurityToken(
@@ -69,7 +72,7 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = true;
+                    Result = "Success";
                 } 
             }
             return Result;
