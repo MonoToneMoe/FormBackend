@@ -1,3 +1,4 @@
+using FormBackend.Model;
 using FormBackend.Model.DTOS;
 using FormBackend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,5 +20,14 @@ namespace FormBackend.Controllers{
         [HttpPut]
         [Route("ResetPassword")]
         public IActionResult ResetPassword([FromBody] ResetPassDTO newPass) => _service.ResetPassword(newPass) != null ? Ok("password reset") : BadRequest("error resetting password");
+
+        [HttpPut]
+        [Route("EditUser")]
+        public IActionResult EditUser([FromBody] UserModel UserToUpdate) => _service.EditUser(UserToUpdate) ? Ok("Successfully Updated") : BadRequest("Error updating user");
+
+        [HttpDelete]
+        [Route("DeleteUser/{id}")]
+        public IActionResult DeleteUser(int id) => _service.DeleteUser(id) ? Ok("Successfully Deleted") : BadRequest("Error deleting user");
+
     }
 }

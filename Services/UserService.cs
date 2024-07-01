@@ -1,14 +1,11 @@
 using FormBackend.Model;
 using FormBackend.Model.DTOS;
 using FormBackend.Services.Context;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FormBackend.Services{
     public class UserService{
@@ -37,6 +34,7 @@ namespace FormBackend.Services{
             };
         }
         public UserModel GetUserByUsername(string username) => _context.UserInfo.SingleOrDefault(u => u.Email == username);
+        public bool DeleteUser(int id) => _context.UserInfo.Remove((UserModel)_context.UserInfo.Where(u => u.ID == id)) != null && _context.SaveChanges() != 0;
         public IEnumerable<UserDTO> GetUsers(){
             IEnumerable<UserModel> users = _context.UserInfo;
             return users.Select(user => Converter(user)).ToList();
@@ -86,6 +84,8 @@ namespace FormBackend.Services{
                 return "Successfully changed password";
             }else return "Email is incorrect, try again";
         }
+        public bool EditUser(UserModel user) => _context.UserInfo.Update((UserModel)_context.UserInfo.Where(u => u.Email == user.Email)) != null && _context.SaveChanges() != 0;
     }
+    
 
 }
