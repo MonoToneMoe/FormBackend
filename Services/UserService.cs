@@ -65,7 +65,7 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    return tokenString == null ? Results.NotFound() : Results.Ok(tokenString);
+                    return tokenString == null ? Results.NotFound("There was an error in  the login") : Results.Ok(new {token = tokenString});
                 } 
             }
             return Results.BadRequest("User name or Password is incorrect");
