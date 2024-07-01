@@ -69,8 +69,8 @@ namespace FormBackend.Services{
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
                     return tokenString == null ? "There was an error in  the login" : tokenString;
                 } 
-            }
-            return "User Not found";
+            }else return "User Not found";
+            return "This is the only return statement";
         }
 
         public bool ResetPassword(ResetPassDTO NewPass){
