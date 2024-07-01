@@ -51,15 +51,17 @@ namespace FormBackend.Services{
             newHashPassword.Hash = hash;
             return newHashPassword;
         }
+
         public UserModel GetUserByUsername(string email) => _context.UserInfo.SingleOrDefault(u => u.Email == email);
-        public bool VerifyUsersPassword(string? passowrd, string? storedHash, string? storedSalt){
+        public bool VerifyUsersPassword(string passowrd, string storedHash, string storedSalt){
             byte[] SaltBytes = Convert.FromBase64String(storedSalt);
             Rfc2898DeriveBytes rfc2898DeriveBytes = new(passowrd, SaltBytes, 10000);
             string newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
             return newHash == storedHash;
         }
-        public string Login(LoginDTO user){
-            string Result = "Not Found";
+
+        public IResult Login(LoginDTO user){
+            IResult Result = Results.Unauthorized();
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Hash)){
@@ -72,7 +74,7 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = "Success";
+                    Result = Results.Ok("Success");
                 } 
             }
             return Result;
