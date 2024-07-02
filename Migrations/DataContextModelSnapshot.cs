@@ -69,12 +69,14 @@ namespace FormBackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<string>("Salt")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
