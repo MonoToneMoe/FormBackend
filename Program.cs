@@ -13,7 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("FormBase");
 builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(connectionString));
 
 builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
-    builder.WithOrigins("http://localhost:5123", "*")
+    builder.WithOrigins("http://localhost:5123", "*", "https://formassignmentbackend.azurewebsites.net")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials();
