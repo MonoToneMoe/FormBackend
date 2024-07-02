@@ -61,11 +61,13 @@ namespace FormBackend.Services{
         }
 
         public IActionResult Login(LoginDTO user){
+            Console.WriteLine("Ran Function");
             IActionResult Result = Unauthorized();
-            Console.WriteLine("Ran");
             if(DoesUserExist(user.Username)){
+                Console.WriteLine("Ran User Check");
                 UserModel userModel = GetUserByUsername(user.Username);
                 if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
+                    Console.WriteLine("Ran Password Verif");
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345extendmeplease"));
                     var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                     var tokenOptions = new JwtSecurityToken(
@@ -75,6 +77,7 @@ namespace FormBackend.Services{
                         expires: DateTime.Now.AddMinutes(30),
                         signingCredentials: signingCredentials
                     );
+                    Console.WriteLine("Ran Token Creation");
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
                     Result = Ok(new {token = tokenString});
                 } 
