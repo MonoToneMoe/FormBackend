@@ -9,7 +9,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FormBackend.Services{
-    public class UserService{
+    public class UserService : ControllerBase{
         private readonly DataContext _context;
         public UserService(DataContext context){_context = context;}
         public bool AddUser(CreateAccountDTO user){
@@ -60,13 +60,13 @@ namespace FormBackend.Services{
             return newHash == storedHash;
         }
 
-        public IResult Login(LoginDTO user){
-            IResult Result = Results.Unauthorized();
+        public IActionResult Login(LoginDTO user){
+            IActionResult Result = Unauthorized();
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
-                if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Hash)){
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345"));
-                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
+                if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345extendmeplease"));
+                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                     var tokenOptions = new JwtSecurityToken(
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
@@ -74,7 +74,7 @@ namespace FormBackend.Services{
                         signingCredentials: signingCredentials
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = Results.Ok("Success");
+                    Result = Ok(new {token = tokenString});
                 } 
             }
             return Result;
