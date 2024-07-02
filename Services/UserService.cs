@@ -60,7 +60,7 @@ namespace FormBackend.Services{
             return newHash == storedHash;
         }
 
-        public IActionResult Logon(LoginDTO user){
+        public IActionResult Login(LoginDTO user){
             Console.WriteLine("Ran Function");
             IActionResult Result = Unauthorized();
             if(DoesUserExist(user.Username)){
