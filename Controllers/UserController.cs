@@ -3,8 +3,12 @@ using FormBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace FormBackend.Controllers{
     [ApiController] [Route("[controller]")]
-    public class UserController(UserService userService) : ControllerBase{
-        private readonly UserService _service = userService;
+    public class UserController: ControllerBase{
+        private readonly UserService _service;
+        public UserController(UserService service){
+            _service = service;
+        }
+
         [HttpPost] [Route("AddUser")] public IActionResult AddUser([FromBody] CreateAccountDTO user) => _service.AddUser(user) ? Ok("sucessfully added") : BadRequest("error adding user");
         [HttpPost] [Route("Login")] public IActionResult Login([FromBody] LoginDTO user) => _service.Login(user);
         [HttpGet] [Route("GetAllUsers")] public IEnumerable<UserDTO> GetAllUsers() => _service.GetUsers();
