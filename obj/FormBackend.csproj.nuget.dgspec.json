@@ -51,10 +51,6 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
-            "Microsoft.CodeAnalysis": {
-              "target": "Package",
-              "version": "[4.10.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.6, )"

@@ -330,3 +330,4 @@ C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\obj\Rel
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\obj\Release\net8.0\FormBackend.pdb
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\obj\Release\net8.0\FormBackend.genruntimeconfig.cache
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\obj\Release\net8.0\ref\FormBackend.dll
+C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
