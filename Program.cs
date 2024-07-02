@@ -20,8 +20,8 @@ builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
 }));
 
 
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
