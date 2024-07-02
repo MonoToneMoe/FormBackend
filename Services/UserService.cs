@@ -62,6 +62,7 @@ namespace FormBackend.Services{
 
         public IActionResult Login(LoginDTO user){
             IActionResult Result = Unauthorized();
+            Console.WriteLine("Ran");
             if(DoesUserExist(user.Username)){
                 UserModel userModel = GetUserByUsername(user.Username);
                 if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
