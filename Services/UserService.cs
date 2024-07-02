@@ -60,30 +60,30 @@ namespace FormBackend.Services{
             return newHash == storedHash;
         }
 
-        public IActionResult Login(LoginDTO user){
-            Console.WriteLine("Ran Function");
-            IActionResult Result = Unauthorized();
-            if(DoesUserExist(user.Username)){
-                Console.WriteLine("Ran User Check");
-                UserModel userModel = GetUserByUsername(user.Username);
-                if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
-                    Console.WriteLine("Ran Password Verif");
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkeythatisextended@345"));
-                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
-                    var tokenOptions = new JwtSecurityToken(
-                        issuer: "http://localhost:5000",
-                        audience: "http://localhost:5000",
-                        claims: new List<Claim>(),
-                        expires: DateTime.Now.AddMinutes(30),
-                        signingCredentials: signingCredentials
-                    );
-                    Console.WriteLine("Ran Token Creation");
-                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    Result = Ok(new {token = tokenString});
-                } 
-            }
-            return Result;
-        }
+        // public IActionResult Login(LoginDTO user){
+        //     Console.WriteLine("Ran Function");
+        //     IActionResult Result = Unauthorized();
+        //     if(DoesUserExist(user.Username)){
+        //         Console.WriteLine("Ran User Check");
+        //         UserModel userModel = GetUserByUsername(user.Username);
+        //         if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
+        //             Console.WriteLine("Ran Password Verif");
+        //             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkeythatisextended@345"));
+        //             var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
+        //             var tokenOptions = new JwtSecurityToken(
+        //                 issuer: "http://localhost:5000",
+        //                 audience: "http://localhost:5000",
+        //                 claims: new List<Claim>(),
+        //                 expires: DateTime.Now.AddMinutes(30),
+        //                 signingCredentials: signingCredentials
+        //             );
+        //             Console.WriteLine("Ran Token Creation");
+        //             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        //             Result = Ok(new {token = tokenString});
+        //         } 
+        //     }
+        //     return Result;
+        // }
 
         public bool ResetPassword(ResetPassDTO NewPass){
             UserModel foundUser = GetUserByUsername(NewPass.Email);
