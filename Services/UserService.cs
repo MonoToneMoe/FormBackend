@@ -2,11 +2,11 @@ using FormBackend.Model;
 using FormBackend.Model.DTOS;
 using FormBackend.Services.Context;
 using System.Security.Cryptography;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FormBackend.Services{
     public class UserService : ControllerBase{
