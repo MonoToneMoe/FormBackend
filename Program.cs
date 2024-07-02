@@ -13,13 +13,13 @@ builder.Services.AddScoped<FormService>();
 var connectionString = builder.Configuration.GetConnectionString("FormBase");
 builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(connectionString));
 
-
 builder.Services.AddCors(options => options.AddPolicy("FormPolicy", builder =>{
     builder.WithOrigins("http://localhost:5123", "*")
-    .AllowAnyOrigin()
     .AllowAnyHeader()
-    .AllowAnyMethod();
+    .AllowAnyMethod()
+    .AllowCredentials();
 }));
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
