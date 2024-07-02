@@ -69,7 +69,7 @@ namespace FormBackend.Services{
                 if(VerifyUsersPassword(user.Password, userModel.Hash, userModel.Salt)){
                     Console.WriteLine("Ran Password Verif");
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkeythatisextended@345"));
-                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
                     var tokenOptions = new JwtSecurityToken(
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
