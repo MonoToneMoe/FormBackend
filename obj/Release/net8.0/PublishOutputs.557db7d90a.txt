@@ -6,6 +6,7 @@ C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Rel
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\FormBackend.pdb
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Azure.Core.dll
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Azure.Identity.dll
+C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Aiden\Desktop\Codestack\GithubRepos\New folder (10)\FormBackend\bin\Release\net8.0\publish\Microsoft.Data.SqlClient.dll
